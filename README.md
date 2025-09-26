@@ -4,9 +4,15 @@
 
 ## Содержание
 
-- [Практическая 1](./Practice1/) - Описание первой практической
-- [Практическая 2](./Practice2/) - Описание второй практической
+- [Практическая 1](./Practice1/) - Первая практическая
+- [Практическая 2](./Practice2/) - Вторая практическая
 
+<details>
+<summary><h2>Как скачать Visual Studio</h2></summary>
+  Переходим по <a href="https://visualstudio.microsoft.com/downloads/">ссылке</a> и скачиваем БЕСПЛАТНУЮ версию Visual Studio.
+<img width="60%" height="auto" alt="изображение" src="https://github.com/user-attachments/assets/5f680a4c-cf29-48a3-a0dd-17cddbd232d4" />
+</details>
+  
 ## Пояснения
 <details>
 <summary>Практическая 1 </summary>
