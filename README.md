@@ -12,6 +12,20 @@
   Переходим по <a href="https://visualstudio.microsoft.com/downloads/">ссылке</a> и скачиваем БЕСПЛАТНУЮ версию Visual Studio.
 <img width="60%" height="auto" alt="изображение" src="https://github.com/user-attachments/assets/5f680a4c-cf29-48a3-a0dd-17cddbd232d4" />
 </details>
+
+<details>
+<summary><h2>Github</h2></summary>
+ Выберете Git в верхней панели, затем создать репозитоий Git.
+  
+  <img  width="60%" height="auto" alt="изображение" src="https://github.com/user-attachments/assets/5e06563a-bf4a-405d-b372-38640ee9d018" />
+
+
+Затем заходите в свой аккаунт гитхаба и выставляете нужные настройки. Не делайте репозиторий приватным - я не смогу его посмотреть.
+ 
+  <img  width="60%" height="auto" alt="изображение" src="https://github.com/user-attachments/assets/1e845414-4185-41e5-aa02-765680d59531" />
+
+</details>
+
   
 ## Пояснения
 <details>
