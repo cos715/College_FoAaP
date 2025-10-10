@@ -117,7 +117,7 @@ namespace example1
             {
                 Console.WriteLine($"Сдача: {change:F2} руб");
             }
-            
+
             Console.WriteLine(new string('=', 40));
 
             // 11. ПРОЩАНИЕ
