@@ -34,6 +34,9 @@
             this.txtQuantity = new System.Windows.Forms.TextBox();
             this.btnCalculate = new System.Windows.Forms.Button();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.chkSugar = new System.Windows.Forms.CheckBox();
+            this.chkMilk = new System.Windows.Forms.CheckBox();
+            this.chkCream = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -88,11 +91,44 @@
             this.lblTotal.TabIndex = 5;
             this.lblTotal.Text = "Итогов: 0 руб";
             // 
+            // chkSugar
+            // 
+            this.chkSugar.AutoSize = true;
+            this.chkSugar.Location = new System.Drawing.Point(13, 217);
+            this.chkSugar.Name = "chkSugar";
+            this.chkSugar.Size = new System.Drawing.Size(103, 17);
+            this.chkSugar.TabIndex = 6;
+            this.chkSugar.Text = "Сахар (+10 руб)";
+            this.chkSugar.UseVisualStyleBackColor = true;
+            // 
+            // chkMilk
+            // 
+            this.chkMilk.AutoSize = true;
+            this.chkMilk.Location = new System.Drawing.Point(122, 217);
+            this.chkMilk.Name = "chkMilk";
+            this.chkMilk.Size = new System.Drawing.Size(112, 17);
+            this.chkMilk.TabIndex = 7;
+            this.chkMilk.Text = "Молоко (+20 руб)";
+            this.chkMilk.UseVisualStyleBackColor = true;
+            // 
+            // chkCream
+            // 
+            this.chkCream.AutoSize = true;
+            this.chkCream.Location = new System.Drawing.Point(259, 217);
+            this.chkCream.Name = "chkCream";
+            this.chkCream.Size = new System.Drawing.Size(110, 17);
+            this.chkCream.TabIndex = 8;
+            this.chkCream.Text = "Сливки (+30 руб)";
+            this.chkCream.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 370);
+            this.ClientSize = new System.Drawing.Size(389, 370);
+            this.Controls.Add(this.chkCream);
+            this.Controls.Add(this.chkMilk);
+            this.Controls.Add(this.chkSugar);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.btnCalculate);
             this.Controls.Add(this.txtQuantity);
@@ -114,6 +150,9 @@
         private System.Windows.Forms.TextBox txtQuantity;
         private System.Windows.Forms.Button btnCalculate;
         private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.CheckBox chkSugar;
+        private System.Windows.Forms.CheckBox chkMilk;
+        private System.Windows.Forms.CheckBox chkCream;
     }
 }
 

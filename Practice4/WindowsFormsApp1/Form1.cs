@@ -20,8 +20,57 @@ namespace WindowsFormsApp1
             comboCoffee.Items.Add("Капучино - 250 руб");
             comboCoffee.Items.Add("Латте - 280 руб");
             comboCoffee.Items.Add("Американо - 220 руб");
-        }
 
+            comboCoffee.SelectedIndexChanged += (s, e) => CalculateTotal();
+            txtQuantity.TextChanged += (s, e) => CalculateTotal();
+            chkSugar.CheckedChanged += (s, e) => CalculateTotal();
+            chkMilk.CheckedChanged += (s, e) => CalculateTotal();
+            chkCream.CheckedChanged += (s, e) => CalculateTotal();
+        }
+        private int GetCoffeePrice()
+        {
+            if (comboCoffee.SelectedItem == null) return 0;
+
+            string selected = comboCoffee.SelectedItem.ToString();
+
+            if (selected.Contains("Эспрессо")) return 200;
+            if (selected.Contains("Капучино")) return 250;
+            if (selected.Contains("Латте")) return 280;
+            if (selected.Contains("Американо")) return 220;
+
+            return 0;
+        }
+        private void CalculateTotal()
+        {
+            // Проверяем, выбран ли кофе
+            if (comboCoffee.SelectedItem == null)
+            {
+                lblTotal.Text = "Итого: 0 руб";
+                return;
+            }
+
+            // Получаем базовую цену кофе
+            int basePrice = GetCoffeePrice();
+
+            // Рассчитываем стоимость добавок
+            int additions = 0;
+
+            // Добавки
+            if (chkSugar.Checked) additions += 10;
+            if (chkMilk.Checked) additions += 20;
+            if (chkCream.Checked) additions += 30;
+
+            // Рассчитываем общую стоимость
+            if (int.TryParse(txtQuantity.Text, out int quantity) && quantity > 0)
+            {
+                int total = (basePrice + additions) * quantity;
+                lblTotal.Text = $"Итого: {total} руб";
+            }
+            else
+            {
+                lblTotal.Text = "Итого: 0 руб";
+            }
+        }
         private void btnCalculate_Click(object sender, EventArgs e)
         {
             // Проверяем выбор кофе
