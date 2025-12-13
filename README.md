@@ -731,4 +731,8 @@ Console.WriteLine($"Можно восстановить доступ: {canRecove
 <img width="351" height="320" alt="изображение" src="https://github.com/user-attachments/assets/340f1ce6-158d-4af2-b901-eda2e00cff83" />
 
 Дополнительно (по желанию): попробуйте изменить цвет кнопок и/или окна и их размер.
+<<<<<<< HEAD
 </details>
+=======
+</details>
+>>>>>>> 8d75de68b2df9947ac932b5cbb2feb3bcfd6ffd1
