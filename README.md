@@ -675,6 +675,250 @@ Console.WriteLine($"Можно восстановить доступ: {canRecove
 
 **Что происходит:** Проверяется корректность пароля и PIN, рассчитывается доступ в систему (оба верны) и возможность восстановления (хотя бы один верен), выводятся результаты.
 </details>
+<details> <summary><h3>Практическая 4</h3></summary>
+
+  ### 1. Объявление пространств имен
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+```
+
+*   **`using`** - директива для подключения пространств имен.
+*   **`System`** - основное пространство имен .NET, содержит базовые классы и типы.
+*   **`System.Windows.Forms`** - пространство имен для создания приложений с графическим интерфейсом (формами, кнопками и т.д.).
+*   **`System.Drawing`** - предоставляет функционал для работы с графикой (цвета, кисти, рисование).
+*   Остальные (`Collections.Generic`, `ComponentModel`, `Data`, `Linq`, `Text`, `Threading.Tasks`) - используются для работы с коллекциями, данными, LINQ-запросами, текстом и асинхронными задачами. Часто добавляются автоматически шаблоном проекта.
+
+### 2. Объявление класса формы
+
+```csharp
+namespace WindowsFormsApp1
+{
+    public partial class Form1 : Form
+    {
+```
+
+*   **`namespace WindowsFormsApp1`** - объявление пространства имен для организации кода вашего приложения.
+*   **`public partial class Form1 : Form`** - объявление класса `Form1`.
+    *   **`public`** - модификатор доступа, означает, что класс доступен извне.
+    *   **`partial`** - указывает, что класс разделен на несколько файлов (обычно `Form1.cs` и `Form1.Designer.cs`).
+    *   **`: Form`** - означает, что `Form1` наследуется от базового класса `Form`, что делает его оконной формой.
+
+### 3. Конструктор формы
+
+```csharp
+public Form1()
+{
+    InitializeComponent();
+```
+
+*   **`public Form1()`** - конструктор класса `Form1`. Вызывается автоматически при создании экземпляра формы.
+*   **`InitializeComponent()`** - метод, который автоматически генерируется средой разработки. Он отвечает за создание и настройку всех элементов управления (кнопок, текстовых полей и т.д.), которые вы добавили на форму в дизайнере.
+
+### 4. Инициализация ComboBox и подписка на события
+
+```csharp
+comboCoffee.Items.Add("Эспрессо - 200 руб");
+comboCoffee.Items.Add("Капучино - 250 руб");
+comboCoffee.Items.Add("Латте - 280 руб");
+comboCoffee.Items.Add("Американо - 220 руб");
+```
+
+*   **`comboCoffee`** - экземпляр элемента управления `ComboBox` (выпадающий список).
+*   **`.Items`** - коллекция элементов внутри `ComboBox`.
+*   **`.Add()`** - метод для добавления нового элемента (строки) в коллекцию.
+*   Здесь в выпадающий список добавляются четыре варианта кофе с их ценами.
+
+```csharp
+comboCoffee.SelectedIndexChanged += (s, e) => CalculateTotal();
+```
+
+*   **`SelectedIndexChanged`** - событие, которое возникает при изменении выбранного элемента в `ComboBox`.
+*   **`+=`** - оператор подписки на событие.
+*   **`(s, e) => CalculateTotal()`** - лямбда-выражение, которое указывает, что при возникновении события будет вызван метод `CalculateTotal()`.
+*   **`s`** - отправитель события (source).
+*   **`e`** - аргументы события (event args).
+
+```csharp
+txtQuantity.TextChanged += (s, e) => CalculateTotal();
+chkSugar.CheckedChanged += (s, e) => CalculateTotal();
+chkMilk.CheckedChanged += (s, e) => CalculateTotal();
+chkCream.CheckedChanged += (s, e) => CalculateTotal();
+```
+
+*   Аналогичным образом подписываются на события других элементов управления:
+    *   **`TextChanged`** - возникает при изменении текста в поле `txtQuantity`.
+    *   **`CheckedChanged`** - возникает при изменении состояния чекбоксов (`chkSugar`, `chkMilk`, `chkCream`).
+
+### 5. Метод GetCoffeePrice
+
+```csharp
+private int GetCoffeePrice()
+{
+    if (comboCoffee.SelectedItem == null) return 0;
+    string selected = comboCoffee.SelectedItem.ToString();
+    if (selected.Contains("Эспрессо")) return 200;
+    if (selected.Contains("Капучино")) return 250;
+    if (selected.Contains("Латте")) return 280;
+    if (selected.Contains("Американо")) return 220;
+    return 0;
+}
+```
+
+*   **`private int GetCoffeePrice()`** - объявление приватного метода, который возвращает целое число (`int`).
+*   **`if (comboCoffee.SelectedItem == null) return 0;`** - проверка: если в `comboCoffee` ничего не выбрано, метод возвращает 0.
+*   **`comboCoffee.SelectedItem`** - выбранный в данный момент элемент в `ComboBox`.
+*   **`.ToString()`** - преобразует выбранный объект в строку.
+*   **`.Contains("Эспрессо")`** - проверяет, содержится ли подстрока "Эспрессо" в строке `selected`. Если да, возвращает соответствующую цену.
+*   Метод проверяет название кофе в строке и возвращает его базовую цену.
+
+### 6. Метод CalculateTotal
+
+```csharp
+private void CalculateTotal()
+{
+    if (comboCoffee.SelectedItem == null)
+    {
+        lblTotal.Text = "Итого: 0 руб";
+        return;
+    }
+```
+
+*   **`private void CalculateTotal()`** - объявление метода, который ничего не возвращает (`void`).
+*   Проверяет, выбран ли тип кофе. Если нет, устанавливает текст метки `lblTotal` в "Итого: 0 руб" и выходит из метода (`return`).
+
+```csharp
+    int basePrice = GetCoffeePrice();
+    int additions = 0;
+    if (chkSugar.Checked) additions += 10;
+    if (chkMilk.Checked) additions += 20;
+    if (chkCream.Checked) additions += 30;
+```
+
+*   **`GetCoffeePrice()`** - вызывает метод для получения базовой цены кофе.
+*   **`additions`** - переменная для подсчета стоимости добавок.
+*   **`chkSugar.Checked`** - свойство, возвращающее `true`, если чекбокс "Сахар" отмечен.
+*   Если чекбокс отмечен, к `additions` прибавляется его стоимость.
+
+```csharp
+    if (int.TryParse(txtQuantity.Text, out int quantity) && quantity > 0)
+    {
+        int total = (basePrice + additions) * quantity;
+        lblTotal.Text = $"Итого: {total} руб";
+    }
+    else
+    {
+        lblTotal.Text = "Итого: 0 руб";
+    }
+}
+```
+
+*   **`int.TryParse(txtQuantity.Text, out int quantity)`** - пытается преобразовать текст из текстового поля `txtQuantity` в целое число.
+    *   **`TryParse`** - безопасный метод преобразования. Возвращает `true`, если преобразование удалось, и `false` - если нет.
+    *   **`out int quantity`** - выходной параметр. Если преобразование удалось, в переменную `quantity` запишется число.
+*   **`&& quantity > 0`** - логическое "И". Проверяет, что преобразование удалось И число больше 0.
+*   Если проверка пройдена, рассчитывается общая стоимость `(базовая цена + добавки) * количество` и результат выводится в метку `lblTotal` с помощью интерполированной строки (`$"..."`).
+*   Если проверка не пройдена (введен нечисловой или отрицательный текст), в метку выводится "Итого: 0 руб".
+
+### 7. Обработчик кнопки "Рассчитать"
+
+```csharp
+private void btnCalculate_Click(object sender, EventArgs e)
+{
+    if (comboCoffee.SelectedItem == null)
+    {
+        MessageBox.Show("Выберите тип кофе!", "Внимание");
+        return;
+    }
+```
+
+*   **`private void btnCalculate_Click(object sender, EventArgs e)`** - обработчик события `Click` для кнопки `btnCalculate`.
+*   **`MessageBox.Show("Выберите тип кофе!", "Внимание")`** - показывает всплывающее окно (message box) с сообщением и заголовком "Внимание". Используется для валидации.
+
+```csharp
+    if (!int.TryParse(txtQuantity.Text, out int quantity) || quantity <= 0)
+    {
+        MessageBox.Show("Введите правильное количество!", "Ошибка");
+        return;
+    }
+```
+
+*   Проверяет корректность введенного количества. Если преобразование не удалось ИЛИ число меньше или равно 0, показывает сообщение об ошибке и прерывает выполнение метода.
+
+```csharp
+    string selectedCoffee = comboCoffee.SelectedItem.ToString();
+    int price = 0;
+    string coffeeName = "";
+    if (selectedCoffee.Contains("Эспрессо")) { price = 200; coffeeName = "Эспрессо"; }
+    else if (selectedCoffee.Contains("Капучино")) { price = 250; coffeeName = "Капучино"; }
+    else if (selectedCoffee.Contains("Латте")) { price = 280; coffeeName = "Латте"; }
+    else if (selectedCoffee.Contains("Американо")) { price = 220; coffeeName = "Американо"; }
+    int total = price * quantity;
+    lblTotal.Text = $"Итого: {total} руб";
+```
+
+*   Повторно определяет выбранный кофе и рассчитывает итог (здесь это дублирование функционала метода `CalculateTotal`, что является недостатком архитектуры данного примера).
+
+```csharp
+    string receiptText = GenerateReceipt(coffeeName, price, quantity, total);
+    ReceiptForm receiptForm = new ReceiptForm(receiptText);
+    receiptForm.Show();
+}
+```
+
+*   **`GenerateReceipt(...)`** - вызывает метод для формирования текста чека, передавая ему необходимые данные.
+*   **`new ReceiptForm(receiptText)`** - создает новый экземпляр формы `ReceiptForm`, передавая в ее конструктор текст чека.
+*   **`receiptForm.Show()`** - показывает новую форму немодально (пользователь может взаимодействовать с главной формой).
+
+### 8. Метод GenerateReceipt
+
+```csharp
+private string GenerateReceipt(string coffeeName, int price, int quantity, int total)
+{
+    return $@"=== КОФЕЙНЯ ===
+
+ДЕТАЛИ ЗАКАЗА:
+------------------------------
+Напиток: {coffeeName}
+Цена за единицу: {price} руб
+Количество: {quantity}
+------------------------------
+ОБЩАЯ СТОИМОСТЬ: {total} руб
+
+Дата: {DateTime.Now:dd.MM.yyyy HH:mm}
+Спасибо за заказ!";
+}
+```
+
+*   **`private string GenerateReceipt(...)`** - объявление метода, который возвращает строку (`string`).
+*   **`$@""`** - комбинация символов для создания интерполированной строки с сохранением форматирования (переносы строк, пробелы).
+*   **`{DateTime.Now:dd.MM.yyyy HH:mm}`** - вставка текущей даты и времени с заданным форматом: день.месяц.год часы:минуты.
+
+### 9. Обработчик кнопки "Очистить"
+
+```csharp
+private void btnClear_Click(object sender, EventArgs e)
+{
+    comboCoffee.SelectedIndex = -1;
+    txtQuantity.Text = "1";
+    lblTotal.Text = "Итого: 0 руб";
+}
+```
+
+*   **`comboCoffee.SelectedIndex = -1;`** - сбрасывает выбор в `ComboBox`. `-1` означает "ничего не выбрано".
+*   **`txtQuantity.Text = "1";`** - устанавливает текст в поле количества обратно в "1".
+*   **`lblTotal.Text = "Итого: 0 руб";`** - сбрасывает итоговую метку.
+
+
+</details>
 
 <details> <summary><h3>Лабораторная 1</h3></summary>
 
@@ -734,5 +978,4 @@ Console.WriteLine($"Можно восстановить доступ: {canRecove
 
 </details>
 
-</details>
 
