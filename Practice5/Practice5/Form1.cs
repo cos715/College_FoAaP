@@ -33,5 +33,12 @@ namespace Practice5
         {
             Application.Exit();
         }
+
+        private void btnPlatformer_Click(object sender, EventArgs e)
+        {
+            PlatformerGame platformerForm = new PlatformerGame();
+            platformerForm.Show();
+            this.Hide();
+        }
     }
 }
